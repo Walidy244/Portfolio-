@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Walid Yassine</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#ffffff;--bg2:#f7f7f5;--text:#1a1a1a;--muted:#6b6b6b;--subtle:#a0a0a0;
+  --border:#e8e8e4;--border2:#c8c8c2;--tag-bg:#f0f0ec;--tag-text:#4a4a4a;
+  --card:#ffffff;--nav-bg:rgba(255,255,255,0.9);--shadow:0 1px 3px rgba(0,0,0,.06),0 4px 16px rgba(0,0,0,.04);
+}
+[data-theme="dark"]{
+  --bg:#0f0f0f;--bg2:#161616;--text:#f0f0f0;--muted:#909090;--subtle:#555;
+  --border:#282828;--border2:#3a3a3a;--tag-bg:#222;--tag-text:#b0b0b0;
+  --card:#161616;--nav-bg:rgba(15,15,15,0.9);--shadow:0 1px 3px rgba(0,0,0,.4),0 4px 16px rgba(0,0,0,.25);
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;line-height:1.6;transition:background .3s,color .3s;font-size:15px}
+
+nav{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:0 2rem;height:52px;backdrop-filter:blur(20px);background:var(--nav-bg);border-bottom:1px solid var(--border);transition:background .3s,border-color .3s}
+.logo{font-family:'Instrument Serif',serif;font-size:1.2rem;color:var(--text)}
+.nav-right{display:flex;align-items:center;gap:1.8rem}
+.nav-links{display:flex;gap:1.6rem;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.8rem;font-weight:500;letter-spacing:.025em;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.theme-btn{width:42px;height:22px;border-radius:11px;background:var(--border2);border:none;cursor:pointer;position:relative;transition:background .3s;flex-shrink:0}
+.theme-btn::after{content:'';position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:transform .3s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+[data-theme="dark"] .theme-btn::after{transform:translateX(20px);background:#f0f0f0}
+.hamburger{display:none;flex-direction:column;gap:4px;cursor:pointer;background:none;border:none;padding:4px}
+.hamburger span{display:block;width:20px;height:1.5px;background:var(--muted);transition:.3s}
+.mobile-menu{display:none;position:fixed;top:52px;left:0;right:0;background:var(--nav-bg);backdrop-filter:blur(20px);padding:1rem 1.5rem 1.5rem;z-index:99;border-bottom:1px solid var(--border)}
+.mobile-menu.open{display:block}
+.mobile-menu a{display:block;color:var(--muted);text-decoration:none;font-size:.9rem;padding:.6rem 0;border-bottom:1px solid var(--border)}
+
+.hero{padding:80px 2rem 64px;text-align:center;max-width:640px;margin:0 auto}
+.hero-tag{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:1.4rem;display:block}
+.hero h1{font-family:'Instrument Serif',serif;font-size:clamp(3rem,7vw,5rem);line-height:1.0;letter-spacing:-.04em;color:var(--text);margin-bottom:.6rem}
+.hero-sub{font-size:1rem;color:var(--muted);font-weight:300;margin-bottom:1.3rem}
+.hero-desc{font-size:.875rem;color:var(--muted);line-height:1.8;max-width:440px;margin:0 auto 2.2rem}
+.btns{display:flex;gap:.65rem;justify-content:center;flex-wrap:wrap}
+.btn-s{padding:.6rem 1.6rem;background:var(--text);color:var(--bg);border:none;border-radius:5px;font-size:.82rem;font-weight:500;cursor:pointer;text-decoration:none;transition:opacity .2s}
+.btn-s:hover{opacity:.75}
+.btn-g{padding:.6rem 1.6rem;background:transparent;color:var(--text);border:1px solid var(--border2);border-radius:5px;font-size:.82rem;font-weight:400;text-decoration:none;transition:border-color .2s}
+.btn-g:hover{border-color:var(--text)}
+
+hr{border:none;border-top:1px solid var(--border)}
+section{padding:64px 0}
+.wrap{max-width:880px;margin:0 auto;padding:0 2rem}
+.s-num{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--subtle);letter-spacing:.1em;display:block;margin-bottom:.4rem}
+.s-title{font-family:'Instrument Serif',serif;font-size:clamp(1.7rem,3vw,2.3rem);letter-spacing:-.03em;color:var(--text);margin-bottom:2.5rem;line-height:1.1}
+
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+@media(max-width:760px){.pgrid{grid-template-columns:1fr}}
+@media(min-width:500px) and (max-width:760px){.pgrid{grid-template-columns:1fr 1fr}}
+.pc{border:1px solid var(--border);border-radius:10px;overflow:hidden;background:var(--card);transition:box-shadow .25s,border-color .25s}
+.pc:hover{box-shadow:var(--shadow);border-color:var(--border2)}
+.pt{width:100%;aspect-ratio:16/10;overflow:hidden;background:var(--bg2);display:flex;align-items:center;justify-content:center}
+.pt img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.pc:hover .pt img{transform:scale(1.04)}
+.pi{padding:1rem 1.1rem 1.2rem}
+.ptags{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:.7rem}
+.ptag{font-family:'JetBrains Mono',monospace;font-size:.62rem;padding:.18rem .55rem;background:var(--tag-bg);color:var(--tag-text);border-radius:4px}
+.pname{font-family:'Instrument Serif',serif;font-size:1.1rem;color:var(--text);margin-bottom:.35rem;letter-spacing:-.01em}
+.pdesc{font-size:.78rem;color:var(--muted);line-height:1.65}
+.plinks{display:flex;gap:1rem;margin-top:.8rem;flex-wrap:wrap}
+.plink{display:inline-block;font-size:.75rem;color:var(--muted);text-decoration:none;border-bottom:1px solid var(--border2);padding-bottom:1px;transition:color .2s,border-color .2s}
+.plink:hover{color:var(--text);border-color:var(--text)}
+
+.tl{max-width:560px}
+.tr{display:grid;grid-template-columns:88px 1fr;gap:1.2rem;padding-bottom:2.2rem;position:relative}
+.tr:not(:last-child)::after{content:'';position:absolute;left:43px;top:22px;bottom:0;width:1px;background:var(--border)}
+.tbadge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.62rem;padding:.22rem .6rem;border-radius:20px;letter-spacing:.04em;white-space:nowrap}
+.tbadge.now{background:var(--text);color:var(--bg)}
+.tbadge.past{background:var(--tag-bg);color:var(--tag-text)}
+.tc-role{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.1rem}
+.tc-org{font-size:.77rem;color:var(--muted);margin-bottom:.45rem}
+.tc-body{font-size:.78rem;color:var(--muted);line-height:1.65}
+
+.skrow{display:flex;flex-wrap:wrap;gap:.5rem}
+.sk{font-family:'JetBrains Mono',monospace;font-size:.72rem;padding:.35rem .85rem;background:var(--tag-bg);color:var(--tag-text);border-radius:5px;border:1px solid var(--border);transition:border-color .2s,color .2s}
+.sk:hover{border-color:var(--border2);color:var(--text)}
+
+.about-g{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:start}
+@media(max-width:600px){.about-g{grid-template-columns:1fr;gap:2rem}}
+.about-g p{font-size:.85rem;color:var(--muted);line-height:1.85;margin-bottom:.9rem}
+.stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.9rem}
+.stat{border:1px solid var(--border);border-radius:8px;padding:1rem;text-align:center}
+.stat-n{font-family:'Instrument Serif',serif;font-size:1.75rem;color:var(--text);display:block;letter-spacing:-.02em}
+.stat-l{font-size:.68rem;color:var(--subtle);margin-top:.2rem}
+
+.ci{max-width:520px}
+.ci h3{font-family:'Instrument Serif',serif;font-size:1.8rem;color:var(--text);margin-bottom:.65rem;letter-spacing:-.02em}
+.ci p{font-size:.87rem;color:var(--muted);line-height:1.8;margin-bottom:1.8rem}
+.clinks{display:flex;flex-wrap:wrap;gap:.65rem}
+.cl{display:inline-flex;align-items:center;gap:.45rem;padding:.55rem 1.1rem;border:1px solid var(--border);border-radius:5px;color:var(--muted);text-decoration:none;font-size:.78rem;transition:all .2s}
+.cl:hover{border-color:var(--border2);color:var(--text)}
+
+footer{padding:1.5rem 2rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem}
+.fn{font-family:'Instrument Serif',serif;font-size:.95rem;color:var(--muted)}
+.fnote{font-size:.72rem;color:var(--subtle)}
+
+@media(max-width:680px){
+  nav{padding:0 1rem}
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .hero{padding:60px 1rem 48px}
+  section{padding:48px 0}
+  .wrap{padding:0 1rem}
+  footer{padding:1.2rem 1rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Walid Yassine</div>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#timeline">Timeline</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme"></button>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMenu()">About</a>
+  <a href="#projects" onclick="closeMenu()">Projects</a>
+  <a href="#timeline" onclick="closeMenu()">Timeline</a>
+  <a href="#skills" onclick="closeMenu()">Skills</a>
+  <a href="#contact" onclick="closeMenu()">Contact</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <span class="hero-tag">Full-Stack Developer</span>
+  <h1>Walid<br>Yassine</h1>
+  <p class="hero-sub">Computer Science — Beirut Arab University</p>
+  <div class="btns">
+    <a href="#projects" class="btn-s">View Projects</a>
+    <a href="#contact" class="btn-g">Get in Touch</a>
+  </div>
+</div>
+
+<hr/>
+
+<!-- ABOUT -->
+<section id="about" style="background:var(--bg2)">
+  <div class="wrap">
+    <span class="s-num">01 — About</span>
+    <h2 class="s-title">Who I Am</h2>
+    <div class="about-g">
+      <div>
+        <p>I'm a Computer Science student at Beirut Arab University, graduating July 2026, passionate about building full-stack applications and IoT systems that solve real problems.</p>
+        <p>From programming microcontrollers wired through AWS cloud infrastructure, to building responsive e-commerce frontends — I love the full stack: hardware, cloud, and UI.</p>
+        <p>I participated in LCPC competitive programming, sharpening my algorithmic thinking, and interned at CAC building high-performance Flutter web apps for clients.</p>
+      </div>
+      <div class="stats">
+        <div class="stat"><span class="stat-n">3+</span><div class="stat-l">Projects Built</div></div>
+        <div class="stat"><span class="stat-n">IoT</span><div class="stat-l">Hardware to Cloud</div></div>
+        <div class="stat"><span class="stat-n">2026</span><div class="stat-l">Graduation Year</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr/>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="wrap">
+    <span class="s-num">02 — Work</span>
+    <h2 class="s-title">Projects</h2>
+    <div class="pgrid">
+
+      <!-- IoT -->
+      <div class="pc">
+        <div class="pt" style="font-size:2.2rem">🔌</div>
+        <div class="pi">
+          <div class="ptags"><span class="ptag">Arduino</span><span class="ptag">AWS Lambda</span><span class="ptag">PostgreSQL</span><span class="ptag">DHT11</span></div>
+          <div class="pname">Aura — IoT Monitor</div>
+          <p class="pdesc">Senior team project. Full-stack IoT system for environmental and solar energy monitoring. Arduino → AWS Lambda → PostgreSQL → live dashboard. DHT11, solar current sensors, and LED control.</p>
+          <div class="plinks">
+            <a href="https://github.com/Walidy244/AURA-IoT" target="_blank" class="plink">GitHub →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Arma -->
+      <div class="pc">
+        <div class="pt" style="font-size:2.2rem">🛍️</div>
+        <div class="pi">
+          <div class="ptags"><span class="ptag">Vanilla JS</span><span class="ptag">HTML/CSS</span><span class="ptag">LocalStorage</span></div>
+          <div class="pname">Arma — E-Commerce</div>
+          <p class="pdesc">Full-featured e-commerce app built with pure Vanilla JS. Products, cart, sign-in, sign-up, contact page — complete shopping experience with LocalStorage persistence and responsive CSS Grid layout.</p>
+          <div class="plinks">
+            <a href="https://walidy244.github.io/E-Commerce/" target="_blank" class="plink">Live Demo →</a>
+            <a href="https://github.com/Walidy244" target="_blank" class="plink">GitHub →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Portfolio -->
+      <div class="pc">
+        <div class="pt" style="display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.3rem">
+          <div style="font-family:'Instrument Serif',serif;font-size:2rem;color:var(--text)">WY.</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--subtle);letter-spacing:.1em">PORTFOLIO</div>
+        </div>
+        <div class="pi">
+          <div class="ptags"><span class="ptag">React</span><span class="ptag">CSS Variables</span><span class="ptag">Responsive</span></div>
+          <div class="pname">This Portfolio</div>
+          <p class="pdesc">Built with React and semantic HTML/CSS. Features light/dark theme toggle, Instrument Serif typography, CSS variables for theming, sticky nav, timeline, and full mobile responsiveness.</p>
+          <div class="plinks">
+            <a href="https://github.com/Walidy244" target="_blank" class="plink">GitHub →</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr/>
+
+<!-- TIMELINE -->
+<section id="timeline" style="background:var(--bg2)">
+  <div class="wrap">
+    <span class="s-num">03 — Journey</span>
+    <h2 class="s-title">Timeline</h2>
+    <div class="tl">
+
+      <div class="tr">
+        <div style="padding-top:.2rem"><span class="tbadge now">Today</span></div>
+        <div>
+          <div class="tc-role">B.S. Computer Science</div>
+          <div class="tc-org">Beirut Arab University · Expected July 2026</div>
+          <p class="tc-body">Concentrations in Web Development & OOP. Data Structures, Algorithms, Database Systems, Software Engineering, Operating Systems, IoT, and Computer Networks.</p>
+        </div>
+      </div>
+
+      <div class="tr">
+        <div style="padding-top:.2rem"><span class="tbadge past">2026</span></div>
+        <div>
+          <div class="tc-role">Senior Project — Aura IoT</div>
+          <div class="tc-org">Beirut Arab University · Team Project</div>
+          <p class="tc-body">Engineered a complete IoT monitoring pipeline from Arduino hardware through AWS Lambda, PostgreSQL, and a live front-end dashboard.</p>
+        </div>
+      </div>
+
+      <div class="tr">
+        <div style="padding-top:.2rem"><span class="tbadge past">May – Jul 2025</span></div>
+        <div>
+          <div class="tc-role">App Developer Intern</div>
+          <div class="tc-org">CAC (Coding and Create)</div>
+          <p class="tc-body">Built high-performance front-end web applications using Flutter, focusing on responsive design and cross-browser stability for production client projects.</p>
+        </div>
+      </div>
+
+      <div class="tr">
+        <div style="padding-top:.2rem"><span class="tbadge past">Oct 2024</span></div>
+        <div>
+          <div class="tc-role">LCPC — Competitive Programming</div>
+          <div class="tc-org">BAU Chapter · Oct 2024 – Dec 2025</div>
+          <p class="tc-body">Lebanese Collegiate Programming Contest community — advanced algorithmic problem-solving and data structures proficiency.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr/>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="wrap">
+    <span class="s-num">04 — Technologies</span>
+    <h2 class="s-title">Skills</h2>
+    <div class="skrow">
+      <span class="sk">Java</span><span class="sk">Python</span><span class="sk">JavaScript</span><span class="sk">React.js</span>
+      <span class="sk">HTML / CSS</span><span class="sk">SQL</span><span class="sk">PostgreSQL</span><span class="sk">AWS</span>
+      <span class="sk">Arduino / IoT</span><span class="sk">Flutter</span><span class="sk">Django</span><span class="sk">Git</span>
+      <span class="sk">Android Studio</span><span class="sk">VS Code</span>
+    </div>
+  </div>
+</section>
+
+<hr/>
+
+<!-- CONTACT -->
+<section id="contact" style="background:var(--bg2)">
+  <div class="wrap">
+    <span class="s-num">05 — Contact</span>
+    <h2 class="s-title">Let's Talk</h2>
+    <div class="ci">
+      <h3>Open to opportunities</h3>
+      <p>Whether it's an internship, collaboration, or conversation about a project — feel free to reach out. I'm always happy to connect with people building interesting things.</p>
+      <div class="clinks">
+        <a href="mailto:walidy473@gmail.com" class="cl">✉ walidy473@gmail.com</a>
+        <a href="tel:+96178943061" class="cl">📞 +961 78 943 061</a>
+        <a href="https://www.linkedin.com/in/walidyassine/" target="_blank" class="cl">LinkedIn ↗</a>
+        <a href="https://github.com/Walidy244" target="_blank" class="cl">GitHub ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="fn">Walid Yassine</span>
+  <span class="fnote">Designed &amp; built by Walid · 2025</span>
+</footer>
+
+<script>
+function toggleTheme(){
+  var h=document.documentElement;
+  var t=h.getAttribute('data-theme')==='dark'?'light':'dark';
+  h.setAttribute('data-theme',t);
+  try{localStorage.setItem('theme',t)}catch(e){}
+}
+try{
+  var saved=localStorage.getItem('theme');
+  if(saved)document.documentElement.setAttribute('data-theme',saved);
+}catch(e){}
+function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open')}
+function closeMenu(){document.getElementById('mobileMenu').classList.remove('open')}
+document.addEventListener('click',function(e){
+  var m=document.getElementById('mobileMenu');
+  if(m.classList.contains('open')&&!m.contains(e.target)&&!document.querySelector('nav').contains(e.target))m.classList.remove('open');
+});
+</script>
+</body>
+</html>
